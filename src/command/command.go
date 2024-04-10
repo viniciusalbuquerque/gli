@@ -4,15 +4,13 @@ import (
     "fmt"
 )
 
-type ExecFunc func(...any) error
-
 type Command struct {
     name        string
     description string
-    fn          func(...any) error
+    fn          func([]string) error
 }
 
-func New(name string, desc string, fn func(...any) error) *Command {
+func New(name string, desc string, fn func([]string) error) *Command {
     return &Command{
         name: name,
         description: desc,
@@ -20,16 +18,17 @@ func New(name string, desc string, fn func(...any) error) *Command {
     }
 }
 
-func (cmd Command) Exec(params ...any) error {
+func (cmd Command) Exec(params []string) error {
     err := cmd.fn(params)
     if err != nil {
-        cmd.printHelp()
+        fmt.Println(err.Error())
+        cmd.PrintHelp()
         return err
     }
     return nil
 }
 
-func (cmd Command) printHelp() {
-    fmt.Println("Print Help!!!")
+func (cmd Command) PrintHelp() {
+    fmt.Println("Print Help for", cmd.name)
 }
 
