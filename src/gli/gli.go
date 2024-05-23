@@ -36,6 +36,7 @@ func ExecCommand(args []string) error {
     return m[cmd].Exec(args[2:])
 }
 
+//TODO: Format print correctly
 func printHelp() {
     fmt.Println("Print big help!!!")
     for _, cmd := range m {

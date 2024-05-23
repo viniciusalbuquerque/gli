@@ -22,7 +22,6 @@ func (cmd Command) Exec(params []string) error {
     err := cmd.fn(params)
     if err != nil {
         fmt.Println(err.Error())
-        cmd.PrintHelp()
         return err
     }
     return nil
